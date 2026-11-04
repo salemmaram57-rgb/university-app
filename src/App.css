@@ -1,0 +1,98 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f6fc;
+  color: #263445;
+}
+
+.header {
+  background-color: #123b63;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+}
+
+.header h1 {
+  margin: 0 0 10px;
+}
+
+.header p {
+  margin: 0;
+}
+
+.navbar {
+  background-color: #dceeff;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+}
+
+.navbar a {
+  color: #123b63;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #0878c9;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  color: #123b63;
+  margin-bottom: 25px;
+}
+
+.students-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.student-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 5px solid #1684cc;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.student-card h2 {
+  color: #123b63;
+  margin-top: 0;
+}
+
+.student-card p {
+  overflow-wrap: anywhere;
+}
+
+.footer {
+  background-color: #123b63;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+.footer p {
+  margin: 5px;
+}
+
+@media (max-width: 500px) {
+  .navbar {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+}
