@@ -5,12 +5,12 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import StudentCard from "./components/StudentCard";
 import Footer from "./components/Footer";
+import StudentForm from "./components/StudentForm";
 
 import "./App.css";
 
 function App() {
 
-  // Liste des étudiants
   const [etudiants, setEtudiants] = useState([
     {
       prenom: "Slim",
@@ -34,11 +34,28 @@ function App() {
       filiere: "RT"
     }
   ]);
+  const [etudiantAModifier, setEtudiantAModifier] = useState(null);
+  function modifierEtudiant(etudiant) {
+  setEtudiantAModifier(etudiant);
+}
 
-  // Recherche
+function ajouterEtudiant(nouvelEtudiant) {
+  const etudiantAvecId = {
+    ...nouvelEtudiant,
+    id: Date.now(),
+  };
+
+  setEtudiants((anciensEtudiants) => [
+    ...anciensEtudiants,
+    etudiantAvecId,
+  ]);
+}
+
+
+
   const [recherche, setRecherche] = useState("");
 
-  // 1. Ajouter un étudiant
+ 
   function ajouterEtudiant() {
 
     const prenom = prompt("Donner le prénom :");
@@ -67,7 +84,7 @@ function App() {
     setEtudiants([...etudiants, nouvelEtudiant]);
   }
 
-  // 2. Supprimer un étudiant
+ 
   function supprimerEtudiant(email) {
 
     setEtudiants(
@@ -77,7 +94,7 @@ function App() {
     );
   }
 
-  // 3. Modifier un étudiant
+ 
   function modifierEtudiant(email) {
 
     const nouveauPrenom = prompt("Donner le nouveau prénom :");
@@ -88,12 +105,23 @@ function App() {
       etudiants.map((etudiant) =>
         etudiant.email === email
           ? { ...etudiant, prenom: nouveauPrenom.trim() }
-          : etudiant
+          : etudiant 
       )
     );
   }
+  function enregistrerModification(etudiantModifie) {
+  setEtudiants((anciensEtudiants) =>
+    anciensEtudiants.map((etudiant) =>
+      etudiant.id === etudiantAModifier.id
+        ? { ...etudiantModifie, id: etudiant.id }
+        : etudiant
+    )
+  );
 
-  // 4. Filtrer les étudiants
+  setEtudiantAModifier(null);
+}
+
+ 
   const etudiantsFiltres = etudiants.filter((etudiant) => {
 
     const texte = recherche.toLowerCase();
@@ -117,7 +145,19 @@ function App() {
 
         <h1>University App</h1>
 
-        {/* Recherche */}
+
+<StudentForm
+  key={etudiantAModifier ? etudiantAModifier.id : "nouveau"}
+  onAjouterEtudiant={ajouterEtudiant}
+  etudiantAModifier={etudiantAModifier}
+  onModifierEtudiant={enregistrerModification}
+/>
+
+
+
+
+
+       
         <div className="search-section">
 
           <input
@@ -129,7 +169,7 @@ function App() {
 
         </div>
 
-        {/* Ajouter un étudiant */}
+        
         <div className="actions">
 
           <button onClick={ajouterEtudiant}>
@@ -138,7 +178,7 @@ function App() {
 
         </div>
 
-        {/* Liste des étudiants */}
+       
         <div className="students-list">
 
           {etudiantsFiltres.length > 0 ? (

@@ -11,11 +11,11 @@ function StudentCard({
   onModifier
 }) {
 
-  // État de visibilité
+  
   const [coordonneesVisibles, setCoordonneesVisibles] =
     useState(false);
 
-  // Afficher ou masquer les coordonnées
+  
   function basculerInformations() {
     setCoordonneesVisibles(!coordonneesVisibles);
   }
@@ -30,7 +30,7 @@ function StudentCard({
         <strong>Filière :</strong> {filiere}
       </p>
 
-      {/* Affichage conditionnel */}
+     
       {coordonneesVisibles && (
         <div className="contact-info">
 
@@ -45,20 +45,25 @@ function StudentCard({
         </div>
       )}
 
-      {/* Bouton afficher / masquer */}
+     
       <button onClick={basculerInformations}>
         {coordonneesVisibles
           ? "Masquer les informations"
           : "Afficher les informations"}
       </button>
 
-      {/* Bouton modifier */}
-      <button onClick={onModifier}>
-        Modifier
+     
+<button onClick={() => onModifier({
+  prenom,
+  nom,
+  email,
+  telephone,
+  filiere
+})}>        Modifier
       </button>
 
-      {/* Bouton supprimer */}
-      <button onClick={onSupprimer}>
+      
+      <button onClick={()=>onSupprimer(email)}>
         Supprimer
       </button>
 
